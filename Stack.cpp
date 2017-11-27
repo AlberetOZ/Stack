@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cassert> 
-
+#define __ALL__ 1
+#define __INV__ 2
 
 typedef int Data;
 
@@ -19,7 +20,7 @@ public:
  
 	void push(Data);     // поместить элемент в вершину стека
 	Data pop();	     // удалить элемент из вершины стека и вернуть его
-	void print();        // вывод стека на экран через пробел
+	void dump(int);	     // вывод стека на экран через пробел
 	Data get(size_t);    // n-й элемент от вершины стека
 	size_t get_size();   // получить размер стека
 	int is_empty();      // возвращает ненулевое значение, если стек пуст, 0 - в противном случае
@@ -109,18 +110,34 @@ Data Stack::pop()
 }
 
 
-void Stack::print()
+void Stack::dump(int type)
 {
 	size_t i = 0;
 
-	for (i = 0; (i != size) && (info[i] != 0); i++)
+	if(type == 1)
 	{
-		printf("%d ", info[i]);
 
+		for (i = 0; (i != size) && (info[i] != 0); i++)
+		{
+			printf("%d ", info[i]);
+
+		}
+	}
+	
+
+	if(type == 2)
+	{
+		i = number-1;
+		for (; i != 0; i--)
+		{
+			printf("%d ", info[i]);
+		}
+		printf("%d ", info[0]);
 	}
 
 
-} 
+
+}
 
 int Stack::is_empty()
 {
@@ -153,7 +170,7 @@ void Stack::summ()
 	if(number < 2)
 	{
 		printf("Have no 2 elements in this Stack:	");
-		Stack::print();
+		Stack::dump(__ALL__);
 
 	}
 	else
@@ -183,7 +200,7 @@ void Stack::summ_in_first()
 	if(number < 2)
 	{
 		printf("Have no 2 elements in this Stack:       ");
-		Stack::print();
+		Stack::dump(__ALL__);
 
 	}
 	else
@@ -223,12 +240,12 @@ int main()
 	printf("\n\n");
 	printf("%d == 228 ????", temp);
 	Stack second_Stack(first_Stack);
-	first_Stack.print();
+	first_Stack.dump(__ALL__);
 	printf("\n");
-	second_Stack.print();
+	second_Stack.dump(__INV__);
 	second_Stack.push(23);
 	printf("\n");
-	second_Stack.print();
+	second_Stack.dump(__ALL__);
 
 	temp = second_Stack.is_empty();
         printf("\n\n");
