@@ -24,8 +24,8 @@ public:
 	size_t get_size();  // получить размер стека
 	int is_empty();     // возвращает ненулевое значение, если стек пуст, 0 - в противном случае
 	void clear();	    // иницилизировать стек нулями
-	size_t get_number();
-
+	size_t get_number();// возвращает номер следующего элемента
+	void summ();	    // суммирует два верхних элемента стека и кладет сумму сверху
 
 };
  
@@ -69,7 +69,7 @@ Stack::Stack( struct Stack& origin)
 
 	}
 
-	number = origin.get_number();
+	number = origin.get_number()+1;
 }
 
 size_t Stack::get_size()
@@ -84,7 +84,7 @@ size_t Stack::get_size()
 void Stack::push(Data n)
 {
 
-	if (number >=  size)
+	if (number ==  size)
 	{
 		size++;
 		info = (Data*)realloc(info, size*sizeof(Data));
@@ -148,6 +148,37 @@ size_t Stack::get_number()
 
 }
 
+void Stack::summ()
+{
+	if(number < 2)
+	{
+		printf("Have no 2 elements in this Stack:	");
+		Stack::print();
+
+	}
+	else
+	{
+
+		if (number ==  size)
+		{
+			size++;
+			info = (Data*)realloc(info, size*sizeof(Data));
+			assert(info);
+		}
+
+
+		info[number] = info[number-1] + info[number-2];
+		number++; 
+
+
+	}
+	
+
+
+}
+
+
+
 int main()
 {
 	Data temp = 0;
@@ -155,10 +186,13 @@ int main()
 	Stack first_Stack(1);
 	
 	first_Stack.push(322);
-//	first_Stack.push(322);
-//	first_Stack.push(322);
-//	first_Stack.push(322);
-//	first_Stack.push(322);
+	first_Stack.summ();
+	first_Stack.push(322);
+	first_Stack.summ();
+
+	first_Stack.push(322);
+	first_Stack.push(322);
+	first_Stack.push(322);
 
 
 
@@ -175,6 +209,14 @@ int main()
 	second_Stack.push(23);
 	printf("\n");
 	second_Stack.print();
+
+	temp = second_Stack.is_empty();
+        printf("\n\n");
+        printf("%d == 228 ????", temp);
+
+
+
+
 	return 0;
 }
 
