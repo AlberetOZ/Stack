@@ -31,11 +31,10 @@ public:
 };
  
  
-Stack::Stack(size_t maxSize)
+Stack::Stack(size_t maxSize):
+	number(0), size(maxSize)
 {		
 	assert(maxSize);
-	
-	size = maxSize;
 
 	assert(&number);
 
@@ -43,7 +42,6 @@ Stack::Stack(size_t maxSize)
 	
 	assert(info);
 
-	number = 0;
 
 }
  
@@ -53,10 +51,11 @@ Stack::~Stack()
 }
 
 
-Stack::Stack( struct Stack& origin)
-{
+Stack::Stack( struct Stack& origin):
 
-	size = origin.get_size();
+
+	number(origin.get_number()+1), size(origin.get_size())
+{
 	assert(&number);
 
 	info = (Data*)calloc(1, size*sizeof(Data));
@@ -70,7 +69,6 @@ Stack::Stack( struct Stack& origin)
 
 	}
 
-	number = origin.get_number()+1;
 }
 
 size_t Stack::get_size()
@@ -220,9 +218,9 @@ int main()
 	Stack first_Stack(1);
 	
 	first_Stack.push(322);
-//	first_Stack.summ();
+	first_Stack.summ();
 	first_Stack.push(322);
-//	first_Stack.summ();
+	first_Stack.summ();
 
 	first_Stack.push(322);
 
@@ -238,7 +236,7 @@ int main()
 
 	temp = first_Stack.pop();
 	printf("\n\n");
-	printf("%d == 228 ????", temp);
+	printf("%d == 322 ????\n", temp);
 	Stack second_Stack(first_Stack);
 	first_Stack.dump(__ALL__);
 	printf("\n");
@@ -249,8 +247,7 @@ int main()
 
 	temp = second_Stack.is_empty();
         printf("\n\n");
-        printf("%d == 228 ????", temp);
-
+        printf("%d == 6 ????\n\n", temp);
 
 
 
