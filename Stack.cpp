@@ -14,19 +14,19 @@ private:
 
 public:
 	Stack(size_t);     		// конструктор    
-	Stack(Stack &);            // конструктор копирования
+	Stack(Stack &);			// конструктор копирования
 	~Stack();                       // деструктор
  
-	void push(Data);    // поместить элемент в вершину стека
-	Data pop();	    // удалить элемент из вершины стека и вернуть его
-	void print();       // вывод стека на экран через пробел
-	Data get(size_t);   // n-й элемент от вершины стека
-	size_t get_size();  // получить размер стека
-	int is_empty();     // возвращает ненулевое значение, если стек пуст, 0 - в противном случае
-	void clear();	    // иницилизировать стек нулями
-	size_t get_number();// возвращает номер следующего элемента
-	void summ();	    // суммирует два верхних элемента стека и кладет сумму сверху
-
+	void push(Data);     // поместить элемент в вершину стека
+	Data pop();	     // удалить элемент из вершины стека и вернуть его
+	void print();        // вывод стека на экран через пробел
+	Data get(size_t);    // n-й элемент от вершины стека
+	size_t get_size();   // получить размер стека
+	int is_empty();      // возвращает ненулевое значение, если стек пуст, 0 - в противном случае
+	void clear();	     // иницилизировать стек нулями
+	size_t get_number(); // возвращает номер следующего элемента
+	void summ();	     // суммирует два верхних элемента стека и кладет сумму сверху
+	void summ_in_first();// суммирует два верхних элемента стека и кладет в нижний из них
 };
  
  
@@ -177,6 +177,23 @@ void Stack::summ()
 
 }
 
+void Stack::summ_in_first()
+{
+
+	if(number < 2)
+	{
+		printf("Have no 2 elements in this Stack:       ");
+		Stack::print();
+
+	}
+	else
+	{
+		info[number-2] += info[number-1]; 
+		number -= 1;
+		info[number] = 0;
+	}
+
+}
 
 
 int main()
@@ -186,13 +203,16 @@ int main()
 	Stack first_Stack(1);
 	
 	first_Stack.push(322);
-	first_Stack.summ();
+//	first_Stack.summ();
 	first_Stack.push(322);
-	first_Stack.summ();
+//	first_Stack.summ();
 
 	first_Stack.push(322);
+
 	first_Stack.push(322);
+	first_Stack.summ_in_first();
 	first_Stack.push(322);
+
 
 
 
