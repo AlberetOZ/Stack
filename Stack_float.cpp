@@ -66,7 +66,7 @@ Stack::~Stack()
 }
 
 
-Stack::Stack( struct Stack& origin):
+Stack::Stack( class Stack& origin):
 
 
 	number(origin.get_number()+1), size(origin.get_size())
